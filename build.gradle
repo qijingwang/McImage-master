@@ -1,6 +1,7 @@
 apply plugin: 'kotlin'
 apply plugin: 'maven-publish'
 apply plugin: 'groovy-gradle-plugin'
+apply plugin: 'java-gradle-plugin'
 //apply from: 'publish.gradle'
 
 group 'com.image.ImagePlugin'
@@ -42,8 +43,8 @@ buildscript {
 
     dependencies {
         classpath 'com.android.tools.build:gradle:7.4.2'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
+//        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.8.0"
     }
 }
 
