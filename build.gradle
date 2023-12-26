@@ -1,0 +1,60 @@
+apply plugin: 'kotlin'
+apply plugin: 'maven-publish'
+apply plugin: 'groovy-gradle-plugin'
+//apply from: 'publish.gradle'
+
+group 'com.image.ImagePlugin'
+version '1.0.0'
+
+publishing {
+    // 配置Plugin GAV
+    publications {
+        maven(MavenPublication) {
+            groupId = group
+            artifactId = 'McImage'
+            version = version
+
+            from components.java
+        }
+    }
+    // 配置仓库地址
+    repositories {
+        maven {
+            url layout.buildDirectory.dir("maven-repo")
+        }
+    }
+}
+gradlePlugin{
+    plugins{
+        DependenciesPlugin{
+            id = 'com.image.ImagePlugin.McImage'
+            implementationClass = 'com.smallsoho.mcplugin.image.ImagePlugin'
+        }
+    }
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        google()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:7.4.2'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        google()
+    }
+}
+
+dependencies {
+    implementation gradleApi()
+    implementation localGroovy()
+    implementation 'com.android.tools.build:gradle:7.4.2'
+}
