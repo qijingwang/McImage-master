@@ -86,6 +86,7 @@ class ImagePlugin : Plugin<Project> {
                     val dir = variant.allRawAndroidResources.files
                     println("project.projectDir ->${project.projectDir}")
                     val assetsDir = File(project.projectDir,"src/main/assets/anim").listFiles()
+                    val chatDir = File(project.projectDir,"src/main/assets/chat").listFiles()
                     val cacheList = ArrayList<String>()
 
                     val imageFileList = ArrayList<File>()
@@ -102,6 +103,15 @@ class ImagePlugin : Plugin<Project> {
                         traverseResDir(child, imageFileList, cacheList, object : IBigImage {
                             override fun onBigImage(file: File) {
                                 println("assets child onBigImage->${child.absolutePath}")
+                                bigImgList.add(file.absolutePath)
+                            }
+                        })
+                    }
+                    for (child : File in chatDir ) {
+                        println("chat child ->${child.absolutePath}")
+                        traverseResDir(child, imageFileList, cacheList, object : IBigImage {
+                            override fun onBigImage(file: File) {
+                                println("chat child onBigImage->${child.absolutePath}")
                                 bigImgList.add(file.absolutePath)
                             }
                         })
